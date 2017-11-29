@@ -19,7 +19,13 @@
 ![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/host.png)
 
 ### 主机详情
-![image]()
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/host-detail1.png)
+
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/host-detail2.png)
+
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/host-detail3.png)
+
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/host-detail4.png)
 
 ### 告警事件
 ![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/event.png)
