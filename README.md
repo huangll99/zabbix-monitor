@@ -7,7 +7,9 @@
 ![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/login.png)
 
 ### 仪表盘
-![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/dashboard.png)
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/dashboard1.png)
+
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/dashboard2.png)
 
 
 ### 主机组
@@ -25,3 +27,8 @@
 ### 应用监控
 ![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/apache.png)
 
+### 监控系统REST API swagger 文档
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/rest-api.png)
+
+### zabbix agent自动化部署
+![image](https://github.com/huangll99/zabbix-monitor/blob/master/pic/pic/agent-deploy.png)
