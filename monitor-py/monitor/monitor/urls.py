@@ -24,6 +24,6 @@ schema_view = get_swagger_view(title='监控系统rest接口')
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls')),
-    url(r'^index/$', index),
-    url(r'^$', schema_view),
+    url(r'^$', index),
+    url(r'^swagger/$', schema_view),
 ]

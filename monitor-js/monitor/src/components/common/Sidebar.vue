@@ -8,8 +8,8 @@
                         <template slot="title">
                             <icon :name="item.icon"></icon>
                             <span> {{ item.title }}</span></template>
-                        <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index">{{ subItem.title
-                            }}
+                        <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index">
+                            {{ subItem.title}}
                         </el-menu-item>
                     </el-submenu>
                 </template>
@@ -20,12 +20,18 @@
                     </el-menu-item>
                 </template>
             </template>
+            <el-menu-item index="#">
+                <a style="color: #cccccc" href="/swagger/"><icon name="file-word-o"></icon> 监控Rest接口</a>
+            </el-menu-item>
         </el-menu>
     </div>
 </template>
 
 <script>
+    import ElMenuItem from "../../../node_modules/element-ui/packages/menu/src/menu-item.vue";
+
     export default {
+        components: {ElMenuItem},
         data() {
             return {
                 items: [
@@ -70,40 +76,19 @@
                             {
                                 index: 'ftp',
                                 title: 'FTP 监控'
-                            },
-                            /*{
-                                index: 'groups',
-                                title: 'Tomcat 监控'
-                            },
-                            {
-                                index: 'hosts',
-                                title: 'Nginx 监控'
-                            },
-                            {
-                                index: 'waterfall',
-                                title: 'Node 监控'
-                            }*/
+                            }
                         ]
                     },
                     {
                         icon: 'database',
                         index: '5',
                         title: '存储监控',
-                       /* subs: [
-                            {
-                                index: 'groups',
-                                title: 'MySQL 监控'
-                            },
-                            {
-                                index: 'hosts',
-                                title: 'Oracle 监控'
-                            },
-                            {
-                                index: 'waterfall',
-                                title: 'Redis 监控'
-                            }
-                        ]*/
                     },
+                    {
+                        icon: 'database',
+                        index: 'agent',
+                        title: 'Zabbix Agent自动化部署'
+                    }
                 ]
             }
         },

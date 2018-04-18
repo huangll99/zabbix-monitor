@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 # Create your views here.
-from rest_framework import mixins, viewsets
+from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
@@ -29,6 +29,15 @@ class GroupView(mixins.ListModelMixin, ViewSet):
 
     def list(self, request, *args, **kwargs):
         return Response(zabbix.group_list())
+
+
+class TemplateView(mixins.ListModelMixin, ViewSet):
+    """
+    模板列表
+    """
+
+    def list(self, request, *args, **kwargs):
+        return Response(zabbix.template_list())
 
 
 class CpuView(mixins.ListModelMixin, ViewSet):
@@ -63,7 +72,8 @@ class DiskView(mixins.ListModelMixin, ViewSet):
 
 class UsageView(mixins.ListModelMixin, ViewSet):
     """
-    获取CPU,内存,磁盘使用占比
+    获取CPU,内存,磁盘使用占比,
+    参数：hostid
     """
 
     def list(self, request, *args, **kwargs):
@@ -103,3 +113,14 @@ class HistoryView(mixins.ListModelMixin, ViewSet):
         itemid = request.query_params.get('itemid', None)
         history_list = zabbix.history_list(itemid)
         return Response(history_list)
+
+
+class TotalUsageView(mixins.ListModelMixin, ViewSet):
+    """
+    获取CPU,内存,磁盘使用占比,
+    """
+
+    def list(self, request, *args, **kwargs):
+        return Response([zabbix.all_usage()])
+
+

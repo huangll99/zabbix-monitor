@@ -49,22 +49,9 @@ export default new Router({
                     path: '/ftp',
                     component: resolve => require(['../components/page/FTPMonitor.vue'], resolve)
                 },
-
                 {
-                    path: '/markdown',
-                    component: resolve => require(['../components/page/Markdown.vue'], resolve)     // Vue-Quill-Editor组件
-                },
-                {
-                    path: '/upload',
-                    component: resolve => require(['../components/page/Upload.vue'], resolve)       // Vue-Core-Image-Upload组件
-                },
-                {
-                    path: '/basecharts',
-                    component: resolve => require(['../components/page/BaseCharts.vue'], resolve)   // vue-schart组件
-                },
-                {
-                    path: '/drag',
-                    component: resolve => require(['../components/page/DragList.vue'], resolve)    // 拖拽列表组件
+                    path: '/agent',
+                    component: resolve => require(['../components/page/Agent.vue'], resolve)
                 }
             ]
         },

@@ -14,6 +14,10 @@ def group_list():
     )
 
 
+def template_list():
+    return zabbix.template.get(output=['name'])
+
+
 def host_list(group=None):
     if group:
         return zabbix.host.get(
@@ -108,7 +112,8 @@ def event_list():
         sortfield='clock',
         sortorder='DESC',
         time_from=t_from,
-        time_till=t_till
+        time_till=t_till,
+        limit=100
     )
     return [{
         'clock': event['clock'],
@@ -132,8 +137,39 @@ def usage(hostid):
     )
     diskUsage = zabbix.history.get(itemids=[diskItemids[0]['itemid']], history=0, output='extend', sortfield='clock',
                                    sortorder='ASC', limit=1)
+    cpuItemids = zabbix.item.get(
+        hostids=[hostid],
+        output=["name",
+                "key_",
+                "value_type",
+                "hostid",
+                "status",
+                "state"],
+        filter={'key_': 'system.cpu.load[percpu,avg1]'}
+    )
+    cpuUsage = zabbix.history.get(itemids=[cpuItemids[0]['itemid']], history=0, output='extend', sortfield='clock',
+                                  sortorder='ASC', limit=1)
+
+    memoryItemids = zabbix.item.get(
+        hostids=[hostid],
+        output=["name",
+                "key_",
+                "value_type",
+                "hostid",
+                "status",
+                "state"],
+        filter={'key_': 'vm.memory.size[used]'}
+    )
+    memoryUsage = zabbix.history.get(itemids=[memoryItemids[0]['itemid']], history=0, output='extend',
+                                     sortfield='clock',
+                                     sortorder='ASC', limit=1)
+    hosts = zabbix.host.get(output=['host', 'hostid', 'name', 'available'], hostids=[hostid], )
+
     return [{
+        'host': hosts[0],
         'diskUsage': diskUsage,
+        'cpuUsage': cpuUsage,
+        'memoryUsage': memoryUsage,
     }]
 
 
@@ -181,12 +217,48 @@ def history_list(itemid):
     if itemid:
         t_till = int(time.time())
         t_from = t_till - 7 * 24 * 60 * 60
-        return zabbix.history.get(
+        return zabbix.trend.get(
             itemids=[itemid],
-            history=3,
             output='extend',
-            sortfield='clock',
-            sortorder='ASC',
             time_from=t_from,
             time_till=t_till,
         )
+
+
+def all_usage():
+    diskItemids = zabbix.item.get(
+        output=["name",
+                "key_",
+                "value_type",
+                "hostid",
+                "status",
+                "state"],
+        filter={'key_': 'vfs.fs.size[/,pfree]'}
+    )
+    diskUsage = zabbix.history.get(itemids=[diskItemids[0]['itemid']], history=0, output='extend',
+                                   sortfield='clock',
+                                   sortorder='ASC', limit=1)
+    return None
+
+
+def create_host(group_id, host_name, host_ip, template_id):
+    host = zabbix.host.create(
+        host=host_name,
+        interfaces=[
+            {
+                'type': 1,
+                'main': 1,
+                'useip': 1,
+                'ip': host_ip,
+                'dns': '',
+                'port': '10050'
+            }
+        ],
+        groups=[{'groupid': group_id}],
+        templates=[
+            {
+                'templateid': template_id,
+            },
+        ]
+    )
+    return host

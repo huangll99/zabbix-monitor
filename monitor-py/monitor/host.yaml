@@ -1,0 +1,13 @@
+- hosts: all
+  remote_user: root
+  tasks:
+  - {name: clean repo, shell: rm -rf /etc/yum.repos.d/*}
+  - {copy: src=./src/CentOS-Media.repo dest=/etc/yum.repos.d/, name: configure mirrors}
+  - {name: update repo, shell: yum clean all&yum makecache}
+  - {name: install zabbix.agent, yum: pkg=zabbix-agent state=latest}
+  - {name: stop firewalld, service: name=firewalld state=stopped}
+  - {copy: src=./src/zabbix_agentd.conf dest=/etc/zabbix/, name: copy zabbix-agent}
+  - {hostname: !!python/unicode 'name='}
+  - {command: !!python/unicode 'sed -i ''s/vm1//g'' /etc/zabbix/zabbix_agentd.conf',
+    name: configuration zabbix-agent}
+  - {name: start zabbix-agent, service: name=zabbix-agent state=started}

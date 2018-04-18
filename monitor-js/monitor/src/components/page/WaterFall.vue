@@ -10,7 +10,7 @@
             <waterfall :lineGap="230" :watch="tableData">
                 <waterfall-slot  :order="index" :key="host.host" :height="200" :width="200" v-for="(host,index) in tableData" >
                     <div style="padding: 10px;width: 200px;height: 200px;">
-                       <div style="height: 200px;border-radius: 30px;text-align: center;line-height:200px;background-color: cadetblue;color: #000;">
+                       <div style="height: 200px;border-radius: 90px;text-align: center;line-height:200px;background-color: rgba(209,94,16,0.65);color: #000;">
 
                            <router-link :to="{path:'hostDetail',query:{hostid:host.hostid}}">{{host.name}}</router-link>
                        </div>

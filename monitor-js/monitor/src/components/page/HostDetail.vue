@@ -11,7 +11,7 @@
                 </div>
                 <div class="box color-yellow" style="width: 40%;">
                     <div class="title">主机名称</div>
-                    <div class="contents"> {{$route.query.hostname}}</div>
+                    <div class="contents"> {{usage.hostname}}</div>
                 </div>
                 <div class="box color-blue" style="width: 28%;">
                     <div class="title">系统运行时间</div>
@@ -29,9 +29,9 @@
                     <h2>CPU利用率</h2>
                     <h3 style="padding-top: 15px;">{{usage.cpu}}%</h3>
                 </i-circle>
-                <i-circle :size=160 class="circle" :percent="usage.memory" stroke-color="red" trail-color="#ccc">
+                <i-circle :size=160 class="circle" :percent="80" stroke-color="red" trail-color="#ccc">
                     <h2>内存利用率</h2>
-                    <h3 style="padding-top: 15px;">{{usage.memory}}%</h3>
+                    <h3 style="padding-top: 15px;">{{usage.memory}} G</h3>
                 </i-circle>
                 <i-circle :size=160 class="circle" :percent="usage.disk" stroke-color="blue" trail-color="#ccc">
                     <h2>磁盘利用率</h2>
@@ -82,11 +82,12 @@
             return {
                 hostid: this.$route.query.hostid,
                 usage: {
-                    disk: 80,
-                    memory: 10,
-                    cpu: 100
+                    disk: 0,
+                    memory: 0,
+                    cpu: 0,
+                    hostname: ''
                 },
-                systemTime:''
+                systemTime: ''
             }
         },
         created() {
@@ -97,13 +98,19 @@
                 }
             }).then((res) => {
                 const items = res.data;
+                let memory = items[0]['cpuUsage'][0]['value'];
+                const i = Math.floor(Math.log(memory) / Math.log(1024));
+                memory = (memory / Math.pow(1024, i)).toPrecision(3);
                 self.usage = {
-                    disk: parseInt(items[0]['diskUsage'][0]['value'])
+                    disk: parseInt(items[0]['diskUsage'][0]['value']),
+                    hostname: items[0]['host']['name'],
+                    memory: memory,
+                    cpu: parseFloat(items[0]['cpuUsage'][0]['value']),
                 }
             });
             setInterval(function () {
-               self.systemTime = moment(new Date().getTime()).format('HH:mm:ss')
-            },1000)
+                self.systemTime = moment(new Date().getTime()).format('HH:mm:ss')
+            }, 1000)
         },
         methods: {}
     }

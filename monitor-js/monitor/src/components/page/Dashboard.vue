@@ -3,6 +3,14 @@
         <quick-menu :position="position" :menuCount="count" :iconClass="icons" :menuUrlList="list"></quick-menu>
 
         <el-row>
+            <el-col :span="5" :offset="1">
+                <china-map></china-map>
+            </el-col>
+            <el-col :span="14" :offset="4">
+                <event-table></event-table>
+            </el-col>
+        </el-row>
+        <el-row style="margin-top: 40px;">
             <el-col :span="2" :offset="2">
                 <el-card>
                     <p class="board-p">
@@ -16,7 +24,7 @@
                     <p class="board-p">
                         <img src="/static/img/mongo.png" alt="">
                     </p>
-                    <p class="board-p">24</p>
+                    <p class="board-p">15</p>
                 </el-card>
             </el-col>
             <el-col :span="2" :offset="2">
@@ -24,7 +32,7 @@
                     <p class="board-p">
                         <img src="/static/img/mysql.png" alt="">
                     </p>
-                    <p class="board-p">24</p>
+                    <p class="board-p">3</p>
                 </el-card>
             </el-col>
             <el-col :span="2" :offset="2">
@@ -32,7 +40,7 @@
                     <p class="board-p">
                         <img src="/static/img/oracle2.jpg" alt="">
                     </p>
-                    <p class="board-p">24</p>
+                    <p class="board-p">4</p>
                 </el-card>
             </el-col>
             <el-col :span="2" :offset="2">
@@ -40,23 +48,28 @@
                     <p class="board-p">
                         <img src="/static/img/tomcat.png" alt="">
                     </p>
-                    <p class="board-p">24</p>
+                    <p class="board-p">31</p>
                 </el-card>
             </el-col>
         </el-row>
-        <div style="margin-top: 40px;">
-            <iframe src="http://172.17.38.107:3000/dashboard-solo/db/windows-pcji-qun-jian-kong?refresh=1m&orgId=1&panelId=8&from=1510220419309&to=1510231219309&var-host=All&var-int=All" width="650" height="300" frameborder="0"></iframe>
 
-            <iframe src="http://172.17.38.107:3000/dashboard-solo/db/windows-pcji-qun-jian-kong?refresh=1m&orgId=1&panelId=14&from=1510220612644&to=1510231412644&var-host=All&var-int=All" width="650" height="300" frameborder="0"></iframe>
-        </div>
-        <div style="margin-top: 40px;">
-            <iframe src="http://172.17.38.107:3000/dashboard-solo/db/windows-pcji-qun-jian-kong?refresh=1m&orgId=1&panelId=15&from=1510220811843&to=1510231611843&var-host=All&var-int=All" width="650" height="300" frameborder="0"></iframe>
-            <iframe src="http://172.17.38.107:3000/dashboard-solo/db/windows-pcji-qun-jian-kong?refresh=1m&orgId=1&panelId=16&from=1510220852848&to=1510231652848&var-host=All&var-int=All" width="650" height="300" frameborder="0"></iframe>
-        </div>
-        <div style="margin-top: 40px;">
-            <iframe src="http://172.17.38.107:3000/dashboard-solo/db/windows-pcji-qun-jian-kong?refresh=1m&orgId=1&panelId=17&from=1510220884462&to=1510231684462&var-host=All&var-int=All" width="650" height="300" frameborder="0"></iframe>
-            <iframe src="http://172.17.38.107:3000/dashboard-solo/db/windows-pcji-qun-jian-kong?refresh=1m&orgId=1&panelId=18&from=1510220901934&to=1510231701934&var-host=All&var-int=All" width="650" height="300" frameborder="0"></iframe>
-        </div>
+        <el-row style="margin-top: 40px;">
+            <el-col :span="10" :offset="1">
+                <iframe src="http://172.17.38.107:3000/dashboard-solo/db/jian-kong-ping-tai-tu-biao?orgId=1&var-group=All&var-host=All&var-application=All&var-item=All&panelId=1&from=now-6h&to=now" width="650" height="300" frameborder="0"></iframe>
+            </el-col>
+            <el-col :span="10" :offset="1">
+                <iframe src="http://172.17.38.107:3000/dashboard-solo/db/jian-kong-ping-tai-tu-biao?orgId=1&var-group=All&var-host=All&var-application=All&var-item=All&panelId=2&from=now-6h&to=now" width="650" height="300" frameborder="0"></iframe>
+            </el-col>
+        </el-row>
+        <el-row style="margin-top: 40px;">
+            <el-col :span="10" :offset="1">
+                <iframe src="http://172.17.38.107:3000/dashboard-solo/db/jian-kong-ping-tai-tu-biao?orgId=1&var-group=All&var-host=All&var-application=All&var-item=All&panelId=3&from=now-6h&to=now" width="650" height="300" frameborder="0"></iframe>
+            </el-col>
+            <el-col :span="10" :offset="1">
+                <iframe src="http://172.17.38.107:3000/dashboard-solo/db/jian-kong-ping-tai-tu-biao?orgId=1&var-group=All&var-host=All&var-application=All&var-item=All&panelId=4&from=now-6h&to=now" width="650" height="300" frameborder="0"></iframe>
+            </el-col>
+        </el-row>
+
     </div>
 </template>
 
@@ -66,9 +79,18 @@
 
     import quickMenu from 'vue-quick-menu'
     import QuickMenu from "../../../node_modules/vue-quick-menu/src/quickMenu.vue";
+    import ElRow from "../../../node_modules/element-ui/packages/row/src/row.vue";
+
+    import ChinaMap from "../common/ChinaMap.vue";
+    import EventTable from "../common/EventTable.vue";
 
     export default {
-        components: {QuickMenu},
+        components: {
+            ElRow,
+            QuickMenu,
+            ChinaMap,
+            EventTable
+        },
         data() {
             return {
                 service: 'httpd',
@@ -76,7 +98,8 @@
                 count:4,
                 icons:['tomcat'],
                 list:['1','2','3','4'],
-                position:'bottom-right'
+                position:'bottom-right',
+                star:4
             }
         },
         created() {
@@ -97,4 +120,7 @@
         height: 40px;
     }
 
+    .quick-menu{
+        z-index: 1000;
+    }
 </style>

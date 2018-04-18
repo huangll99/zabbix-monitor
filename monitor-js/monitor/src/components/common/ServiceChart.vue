@@ -64,7 +64,7 @@
                 let xdata = [];
                 for (let j = 0; j < items.length; j++) {
                     xdata.push(items[j]['clock']);
-                    ydata.push(items[j]['value']);
+                    ydata.push(items[j]['value_avg']);
                 }
                 xdata = xdata.map(function (time) {
                     return moment(time * 1000).format('HH:mm:ss') + '\n\n' + moment(time * 1000).format('YYYY/MM/DD')
